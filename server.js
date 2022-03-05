@@ -41,7 +41,7 @@ function validateNote(note) {
     return true;
 }
 
-app.post('/notes', (req, res) => {
+app.post('/api/notes', (req, res) => {
     //req.body is where our incoming content will be
     console.log(req.body);
 
