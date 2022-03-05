@@ -1,33 +1,22 @@
-//npm modules
+//npm module
 const express = require ('express');
-const path = require ('path');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+const htmlRoutes = require('./routes/htmlRoutes');
 
-//routes that the front-end can request data from
-const { notes } = require('./db/db.json');
+//middleware/parse incoming string or array data
+app.use(express.urlencoded({ extended: true }))
+//parse incoming JSON data
+app.use(express.json());
 
-//directs user to homepage where there is no endpoint
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-});
+app.use('/', htmlRoutes);
 
-//directs user to notes page when endpoint is /notes
-app.get('/notes', (req, res) =>{
-    // res.sendFile(path.join(__dirname, './public/notes.html'));
-
-    let results = notes;
-
-    console.log(req.query)
-
-    res.json(results);
-});
-
-//wildcard route that routes users back to the homepage if a request is made for a page that does not exist
-app.get('*', (req, res) =>{
-    res.sendFile(path.join(__dirname, './public/index.html'));
-});
+app.post('/notes', (req, res) => {
+    //req.body is where our incoming content will be
+    console.log(req.body);
+    res.json(req.body)
+})
 
 //listening for incoming requests
 app.listen(PORT, () => {
