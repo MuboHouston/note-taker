@@ -13,6 +13,8 @@ const { notes } = require('./db/db.json');
 app.use(express.urlencoded({ extended: true }))
 //parse incoming JSON data
 app.use(express.json());
+//middleware that instructs the server to make files in the public directory available
+app.use(express.static('public'))
 
 app.use('/', htmlRoutes);
 
