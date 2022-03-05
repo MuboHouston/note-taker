@@ -1,8 +1,14 @@
 {
-    "notes": [
+  "notes": [
     {
-        "title":"Test Title",
-        "text":"Test text"
+      "title": "Coding Bootcamp",
+      "text": "Learning Express.js",
+      "id": "0"
+    },
+    {
+      "title": "Coding Bootcamp",
+      "text": "Learning Express.js",
+      "id": "1"
     }
-]
+  ]
 }
