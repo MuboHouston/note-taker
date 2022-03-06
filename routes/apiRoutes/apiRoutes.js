@@ -3,8 +3,8 @@ const fs = require('fs')
 const path = require ('path');
 const router = require('express').Router();
 
-const { notes_array } = require('../../db/db.json');
-const { createNewNotes, validateNote } = require('../../lib/notes')
+let { notes_array } = require('../../db/db.json');
+const { createNewNotes, validateNote } = require('../../lib/notes');
 
 router.get("/notes", (req, res) => {
     fs.readFile(path.join(__dirname, '../../db/db.json'), 'utf8', (err, data) => {
@@ -28,6 +28,22 @@ router.post('/notes', (req, res) => {
     } else {
     const note = createNewNotes(req.body, notes_array)
     res.json(note)
+    }
+})
+
+router.delete('/notes/:id', (req, res) => {
+    //gets the id number
+    const { id } = req.params;
+    console.log(`DELETE Req Called on id number ${id}`)
+    
+    const deleted = notes_array.find(note => note.id === id)
+    if(deleted){
+        console.log(deleted)
+        notes_array = notes_array.filter(note => note.id !== id)
+        console.log(notes_array)
+        return res.json(notes_array)
+    } else {
+        res.status(404).json({ message: "Note does not exist"})
     }
 })
 
