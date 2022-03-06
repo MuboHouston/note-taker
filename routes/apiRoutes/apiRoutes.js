@@ -31,21 +31,47 @@ router.post('/notes', (req, res) => {
     }
 })
 
-router.delete('/notes/:id', (req, res) => {
-    //gets the id number
-    const { id } = req.params;
-    console.log(`DELETE Req Called on id number ${id}`)
+// router.delete('/notes/:id', (req, res) => {
+//     //gets the id number
+    // const { id } = req.params;
+//     console.log(`DELETE Req Called on id number ${id}`)
     
-    const deleted = notes_array.find(note => note.id === id)
-    if(deleted){
-        console.log(deleted)
-        notes_array = notes_array.filter(note => note.id !== id)
-        console.log(notes_array)
-        return res.json(notes_array)
-    } else {
-        res.status(404).json({ message: "Note does not exist"})
-    }
-})
+    // const deleted = notes_array.find(note => note.id === id)
+    // if(deleted){
+    //     console.log(deleted)
+    //     notes_array = notes_array.filter(note => note.id !== id)
+    //     console.log(notes_array)
+    //     return res.json(notes_array)
+//     } else {
+//         res.status(404).json({ message: "Note does not exist"})
+//     }
+// })
 
+router.delete("/notes/:id", (req, res) => {
+    const { id } = req.params;
+
+    fs.readFile((path.join(__dirname, '../../db/db.json'), "utf8", JSON.stringify(notes_array), (err) => {
+        if(err) {
+            throw err
+        } else {
+        const deleted = notes_array.find(note => note.id === id)
+        console.log(JSON.parse(deleted))
+
+        if(deleted){
+        console.log(deleted)
+        data = data.filter(note => note.id !== id)
+        console.log(data)
+        }
+
+        fs.writeFile((path.join(__dirname, '../../db/db.json'), JSON.stringify(data), function (err) {
+            if (err) throw err
+            else {
+                console.log("Note has been Updated")
+                return res.json(data);
+            }
+        }))
+    }
+    }))
+});
 
 module.exports = router;
