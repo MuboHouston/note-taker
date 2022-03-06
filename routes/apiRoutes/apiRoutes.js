@@ -1,4 +1,5 @@
 //npm module
+const fs = require('fs')
 const path = require ('path');
 const router = require('express').Router();
 
@@ -6,11 +7,10 @@ const { notes_array } = require('../../db/db.json');
 const { createNewNotes, validateNote } = require('../../lib/notes')
 
 router.get("/notes", (req, res) => {
-    fs.readFile('../../db/db.json', 'utf8', (err, data) => {
-        if (err) {
-            console.log(err);
+    fs.readFile(path.join(__dirname, '../../db/db.json'), 'utf8', (err, data) => {
+        if (err) {throw err
         } else {
-            return res.json(data)
+            return res.json(JSON.parse(data).notes_array)
         }
     })
 })
@@ -31,9 +31,5 @@ router.post('/notes', (req, res) => {
     }
 })
 
-//wildcard route that routes users back to the homepage if a request is made for a page that does not exist
-router.get('*', (req, res) =>{
-    res.sendFile(path.join(__dirname, '../../public/index.html'));
-});
 
 module.exports = router;

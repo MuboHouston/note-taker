@@ -3,7 +3,7 @@ const express = require ('express');
 const app = express();
 
 const htmlRoutes = require('./routes/htmlRoutes');
-const apiRoutes = require('./routes/apiRoutes/apiRoutes');
+const apiRoutes = require('./routes/apiRoutes/apiRoutes')
 
 const PORT = process.env.PORT || 3001;
 
@@ -14,8 +14,8 @@ app.use(express.json());
 //middleware that instructs the server to make files in the public directory available
 app.use(express.static('public'))
 
-app.use('/', htmlRoutes);
 app.use('/api', apiRoutes)
+app.use('/', htmlRoutes);
 
 //listening for incoming requests
 app.listen(PORT, () => {
