@@ -1,24 +1,14 @@
 {
-  "notes": [
+  "notes_array": [
     {
-      "title": "Coding Bootcamp",
-      "text": "Learning Express.js",
+      "title": "Today",
+      "text": "03/26/22",
       "id": "0"
     },
     {
-      "title": "Coding Bootcamp",
-      "text": "Learning Express.js",
+      "title": "Test 2",
+      "text": "03/06/22",
       "id": "1"
-    },
-    {
-      "title": "Coding Bootcamp",
-      "text": "Learning Node.js and Express.js",
-      "id": "2"
-    },
-    {
-      "title": "Testing from Notes Site",
-      "text": "Testing from Notes site",
-      "id": "3"
     }
   ]
 }
