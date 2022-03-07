@@ -37,12 +37,13 @@ router.delete('/notes/:id', (req, res) => {
     // console.log(`DELETE Req Called on id number ${id}`)
     const deletedNote = notes_array.find(note => note.id === id)
 
-    if(deletedNote){
-        // console.log(deletedNote)
-        res.status(200).json(deleteNote(deletedNote.id, notes_array))
-    } else {
-        res.status(404).send("Note does not exist")
-    }
+    fs.readFile(path.join(__dirname, '../../db/db.json'), 'utf8', (err, data) => {
+        if (err) {throw err
+        } else {
+        console.log(deletedNote)
+        res.status(200).json(deleteNote(deletedNote.id, JSON.parse(data).notes_array))
+        }
+    })
 })
 
 module.exports = router;
