@@ -4,9 +4,10 @@ const path = require ('path');
 const router = require('express').Router();
 
 const { createNewNotes, validateNote, deleteNote } = require('../../lib/notes');
-var { notes_array } = require('../../db/db.json');
+var { notes_array } = require('../../db/db.json'); 
 
 router.get("/notes", (req, res) => {
+    
     fs.readFile(path.join(__dirname, '../../db/db.json'), 'utf8', (err, data) => {
         if (err) {throw err
         } else {
