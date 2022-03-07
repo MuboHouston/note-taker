@@ -3,8 +3,8 @@ const fs = require('fs')
 const path = require ('path');
 const router = require('express').Router();
 
-let { notes_array } = require('../../db/db.json');
-const { createNewNotes, validateNote } = require('../../lib/notes');
+const { createNewNotes, validateNote, deleteNote } = require('../../lib/notes');
+var { notes_array } = require('../../db/db.json');
 
 router.get("/notes", (req, res) => {
     fs.readFile(path.join(__dirname, '../../db/db.json'), 'utf8', (err, data) => {
@@ -31,47 +31,18 @@ router.post('/notes', (req, res) => {
     }
 })
 
-// router.delete('/notes/:id', (req, res) => {
-//     //gets the id number
-    // const { id } = req.params;
-//     console.log(`DELETE Req Called on id number ${id}`)
-    
-    // const deleted = notes_array.find(note => note.id === id)
-    // if(deleted){
-    //     console.log(deleted)
-    //     notes_array = notes_array.filter(note => note.id !== id)
-    //     console.log(notes_array)
-    //     return res.json(notes_array)
-//     } else {
-//         res.status(404).json({ message: "Note does not exist"})
-//     }
-// })
-
-router.delete("/notes/:id", (req, res) => {
+router.delete('/notes/:id', (req, res) => {
+    //gets the id number
     const { id } = req.params;
+    // console.log(`DELETE Req Called on id number ${id}`)
+    const deletedNote = notes_array.find(note => note.id === id)
 
-    fs.readFile((path.join(__dirname, '../../db/db.json'), "utf8", JSON.stringify(notes_array), (err) => {
-        if(err) {
-            throw err
-        } else {
-        const deleted = notes_array.find(note => note.id === id)
-        console.log(JSON.parse(deleted))
-
-        if(deleted){
-        console.log(deleted)
-        data = data.filter(note => note.id !== id)
-        console.log(data)
-        }
-
-        fs.writeFile((path.join(__dirname, '../../db/db.json'), JSON.stringify(data), function (err) {
-            if (err) throw err
-            else {
-                console.log("Note has been Updated")
-                return res.json(data);
-            }
-        }))
+    if(deletedNote){
+        // console.log(deletedNote)
+        res.status(200).json(deleteNote(deletedNote.id, notes_array))
+    } else {
+        res.status(404).send("Note does not exist")
     }
-    }))
-});
+})
 
 module.exports = router;

@@ -1,24 +1,14 @@
 {
   "notes_array": [
     {
-      "title": "Today",
-      "text": "03/26/22",
-      "id": "0"
-    },
-    {
-      "title": "Test 2",
-      "text": "03/06/22",
-      "id": "1"
-    },
-    {
-      "title": "Testing 3",
-      "text": "03/06/22",
+      "title": "2",
+      "text": "2",
       "id": "2"
     },
     {
-      "title": "Insomnia",
-      "text": "Testing",
-      "id": "3"
+      "title": "3",
+      "text": "3",
+      "id": "2"
     }
   ]
 }
