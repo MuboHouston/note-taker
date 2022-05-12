@@ -23,9 +23,12 @@ fs.readFile(path.join(__dirname, '../../db/db.json'), 'utf8', (err, data) =>{
     })
 
     router.delete('/notes/:id', (req, res) => {
-    notes.splice(req.params.id, 1);
-    updateDb(notes);
-    console.log("Deleted note", notes)
+        //gets the id number
+        const id = req.params.id;
+
+        notes.splice(id, 1);
+        updateDb(notes);
+        console.log("New list", notes)
     })
 })
 
