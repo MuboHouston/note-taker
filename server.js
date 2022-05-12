@@ -5,7 +5,7 @@ const app = express();
 const htmlRoutes = require('./routes/htmlRoutes');
 const apiRoutes = require('./routes/apiRoutes/apiRoutes')
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 //middleware/parse incoming string or array data
 app.use(express.urlencoded({ extended: true }))
