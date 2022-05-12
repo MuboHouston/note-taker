@@ -28,15 +28,15 @@ fs.readFile(path.join(__dirname, '../../db/db.json'), 'utf8', (err, data) => {
         res.json(note)
     })
 
-router.delete('/notes/:id', (req, res) => {
-    //gets the id number
-    const id = req.params.id;
-    console.log(`DELETE Req Called on id number ${id}`)
+    router.delete('/notes/:id', (req, res) => {
+        //gets the id number
+        const id = req.params.id;
+        console.log(`DELETE Req Called on id number ${id}`)
 
-    deleteNote(id, notes)
+        deleteNote(id, notes)
 
-    res.json(notes)
+        res.json(notes)
 
-})
+    })
 })
 module.exports = router;
